@@ -117,7 +117,9 @@ from wellswatch import show_map
 show_map(2025)
 ```
 
-The current Zenodo record contains prediction files for **1 August** of each year from **2013 to 2025**. Therefore:
+The current Zenodo record contains prediction files for 1 August of each year from 2013 to 2025. WellsWatch 
+is designed to provide maps for all available years from 2013 onward, as new annual prediction files are 
+added to the Zenodo record. Therefore:
 
 ```python
 show_map(2025)
