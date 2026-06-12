@@ -14,14 +14,14 @@ It is designed for researchers, water-resource managers, hydrogeologists, and ot
 
 ## Why WellsWatch?
 
-Groundwater observations are often distributed across multiple files and monitoring locations. WellsWatch provides a simple Python interface that:
+Groundwater observations and model outputs are often distributed across multiple files and monitoring locations. WellsWatch provides a simple Python interface that:
 
 - downloads the requested prediction file directly from Zenodo;
 - validates the expected data structure;
 - extracts the prediction date from the filename;
 - distinguishes `red` and `non_red` monitoring wells;
 - creates a national map of Greece;
-- saves the map as a high-resolution image when requested.
+- saves the generated map as a high-resolution image when requested.
 
 The main workflow requires only two lines of Python:
 
@@ -33,13 +33,47 @@ show_map(2025)
 
 ---
 
-## Example map
+## Example maps and hydroclimatic context
 
-![Predicted groundwater status in Greece for 1 August 2025](docs/wellswatch_2025.png)
+The two maps below illustrate groundwater-status predictions under contrasting hydroclimatic conditions.
 
-- **Red wells** represent stations classified as being in a red groundwater state.
-- **Non-red wells** represent stations not classified as red.
-- The published class label is used directly; WellsWatch does not recalculate the classification from the probability column.
+### 1 August 2015 — wet year
+
+The year 2015 was a comparatively wet year within the 2013–2025 series. The map shows a larger proportion of non-red wells than in the recent dry years, although red-state conditions were still predicted at many monitoring stations.
+
+```python
+from wellswatch import show_map
+
+show_map(2015)
+```
+
+![Predicted groundwater status in Greece on 1 August 2015](docs/wellswatch_2015.png)
+
+### 1 August 2025 — dry year
+
+The year 2025 was a comparatively dry year, following the very dry conditions observed in 2024. The map is dominated by red wells, indicating widespread deeper-than-normal groundwater conditions relative to the historical reference used by the classifier.
+
+```python
+from wellswatch import show_map
+
+show_map(2025)
+```
+
+![Predicted groundwater status in Greece on 1 August 2025](docs/wellswatch_2025.png)
+
+In both maps:
+
+- **Red wells** represent monitoring stations classified as being in a red groundwater state.
+- **Non-red wells** represent monitoring stations not classified as red.
+- WellsWatch uses the published class label directly and does not recalculate the classification from the probability column.
+
+### Predictions from 2013 onward and annual precipitation
+
+The figure below summarizes the annual percentages of wells predicted as red and non-red from 2013 onward, together with mean annual precipitation and its standard error of the mean (SEM).
+
+![Annual predicted red and non-red well percentages and mean precipitation, 2013–2025](docs/red_nonred_precipitation_2013_2025.png)
+
+Across the series, wetter years generally show a larger percentage of non-red wells, whereas drier years tend to show a larger percentage of red wells. The contrast is particularly clear between wet 2015 and dry 2025. This figure provides a descriptive comparison of groundwater-status predictions and precipitation; it should not, by itself, be interpreted as evidence of a causal relationship.
 
 ---
 
@@ -220,6 +254,8 @@ The dataset is licensed under the **Creative Commons Attribution 4.0 Internation
 ```text
 wellswatch/
 ├── docs/
+│   ├── red_nonred_precipitation_2013_2025.png
+│   ├── wellswatch_2015.png
 │   └── wellswatch_2025.png
 ├── src/
 │   └── wellswatch/
